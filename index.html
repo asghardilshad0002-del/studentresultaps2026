@@ -1,18 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ABC Academy Results</title>
+</head>
 <body>
 
-<h1>Welcome to ABC Academy</h1>
-<h2>Student Portal</h2>
+<h1>ABC Academy Result Checker</h1>
 
-<p>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScDbxemzek6bA9G4IjhB1c_DbnaLYXG3IPnK1y_H0IMBjGzVQ/viewform?usp=dialog" target="_blank">
-    Submit Your Details
-  </a>
-</p>
+<p>Enter your name and class to see your result:</p>
 
-<p>
-  <a href="https://docs.google.com/spreadsheets/d/1gRqpU_4WgJ-lSs4EwLEuc_4wQ289APFieHXfdGj8twQ/edit?usp=sharing" target="_blank">
-    Check Your Result
-  </a>
-</p>
+<input type="text" id="name" placeholder="Your Name">
+<input type="text" id="class" placeholder="Class (e.g., Class 6)">
+<button onclick="checkResult()">Check Result</button>
+
+<p id="output"></p>
+
+<script>
+// -------------- Paste your results here ---------------
+const results = [
+  { name: "Ali Khan", class: "Class 6", marks: 85, grade: "A", status: "Pass" },
+  { name: "Sara Ahmed", class: "Class 7", marks: 72, grade: "B", status: "Pass" },
+  { name: "Bilal Khan", class: "Class 6", marks: 45, grade: "C", status: "Fail" }
+];
+// ------------------------------------------------------
+
+function checkResult() {
+  const nameInput = document.getElementById("name").value.trim();
+  const classInput = document.getElementById("class").value.trim();
+  const output = document.getElementById("output");
+
+  const student = results.find(
+    s => s.name.toLowerCase() === nameInput.toLowerCase() &&
+         s.class.toLowerCase() === classInput.toLowerCase()
+  );
+
+  if (student) {
+    output.innerHTML = `
+      <b>Name:</b> ${student.name} <br>
+      <b>Class:</b> ${student.class} <br>
+      <b>Marks:</b> ${student.marks} <br>
+      <b>Grade:</b> ${student.grade} <br>
+      <b>Status:</b> ${student.status}
+    `;
+  } else {
+    output.innerHTML = "Result not found. Check your name and class.";
+  }
+}
+</script>
 
 </body>
+</html>
